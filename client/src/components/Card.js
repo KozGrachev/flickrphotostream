@@ -2,18 +2,15 @@ import React, { useEffect } from 'react';
 import '../css/Card.css';
 
 
-
-
 export default function Card ({ title, photoUrl, author, authorUrl, description, tags }) {
-  console.log(authorUrl);
 
   useEffect(() => {
 
   }, []);
 
   function renderTags () {
-    return tags.split(' ').map(tag => {
-      return <li ><div className="tag-text">{ tag}</div><button >+</button></li>
+    return tags.split(' ').map((tag, i) => {
+      return <li key={tag+i}><div className="tag-text">{ tag}</div><button >+</button></li>
     })
   }
 
