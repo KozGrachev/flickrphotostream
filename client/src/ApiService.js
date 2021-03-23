@@ -9,7 +9,6 @@ export async function fetchFlickr (path, ...params) {
   }
 
   numCalls++;
-  console.log(path + params.join('/'));
-  console.log(`API called ${numCalls} times`);
+  console.log(path + params.join('/'), `    API called ${numCalls} times`);
   return await response.json();
 }

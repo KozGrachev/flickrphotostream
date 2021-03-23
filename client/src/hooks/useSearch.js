@@ -8,7 +8,7 @@ export default function useSearch (query, pageNum) {
 
   const [searching, setSearching] = useState(true);
   const [error, setError] = useState(false);
-  const [photos, setPhotos] = useState([]);
+  const [foundPhotos, setFoundPhotos] = useState([]);
   const [hasMore, setHasMore] = useState(false)
 
   useEffect(() => {
@@ -23,11 +23,10 @@ export default function useSearch (query, pageNum) {
         const jsonRes = await res.json();
         console.log('USING USESEARCH!!!!', query)
         console.log('JSON RESPONSE:::   ', jsonRes);
-        setPhotos(currentPhotos => {
-          return [...currentPhotos, jsonRes.photos.photo.map(photo => {
-            return photo.id;
-          })]
+        setFoundPhotos(currentPhotos => {
+          return [...new Set([...currentPhotos, ...jsonRes.photos.photo])]
         });
+
         setHasMore(jsonRes.photos.photo.length > 0);
         setSearching(false);
       } catch (error) {
@@ -39,11 +38,15 @@ export default function useSearch (query, pageNum) {
       }
     }
 
-    debounceFunction(searchFetch);
+    query && debounceFunction(searchFetch);
 
     return () => controller.abort();
 
   }, [query, pageNum]);
+
+  useEffect(() => {
+    setFoundPhotos([]);
+  }, [query]);
 
   function debounceFunction (func) {
     clearTimeout(timeLimit);
@@ -53,5 +56,5 @@ export default function useSearch (query, pageNum) {
     }, 1000);
   }
 
-  return {searching, error, photos, hasMore};
+  return {searching, error, foundPhotos, hasMore};
 }

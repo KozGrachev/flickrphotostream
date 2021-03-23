@@ -38,7 +38,7 @@ router.get('/search/:query/:pageNum', async (req, res) => {
   const url = baseUrl + '/rest/?' + new URLSearchParams({
     text: query,
     page: pageNum,
-    extras: ['url_s', 'description', 'tags', 'owner_name'],
+    extras: ['url_m', 'description', 'tags', 'owner_name'],
     api_key: 'fced83294eb6fb247c8febeb9c10770d',
     method: 'flickr.photos.search',
     format: 'json',
