@@ -1,13 +1,29 @@
 import './css/App.css';
 import { fetchFlickr } from "./ApiService"
-import { useEffect, useState } from 'react';
+import useSearch from "./hooks/useSearch"
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Card from './components/Card';
 
 function App () {
+  const sizeCode = 'm';
 
   const [apiData, setApiData] = useState({ photos: [] });
   const [loading, setLoading] = useState(true);
-  const sizeCode = 's';
+  const [query, setQuery] = useState('');
+  const [pageNum, setPageNum] = useState(1);
+
+  const { foundPhotos, searching, error, hasMore } = useSearch(query, pageNum);
+  const observer = useRef();
+  const lastCardRef = useCallback(lastCard => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPageNum(pn => pn + 1);
+      }
+    });
+    if (lastCard) observer.current.observe(lastCard);
+  }, [loading, hasMore]);
 
   useEffect(() => {
     async function getData () {
@@ -19,48 +35,49 @@ function App () {
         data.photo[i] = { ...data.photo[i], authorUrl };
       }
 
-
       setApiData(data);
       setLoading(false);
     }
     getData();
   }, []);
 
-  async function getUserUrl (photosArr) {
+
+  console.log(foundPhotos.map((p, i) => i + '   ' + p.title + '   ' + p.id))
+
+  function handleSearch (e) {
+    setQuery(e.target.value);
+    setPageNum(1);
+
   }
 
-  function renderCards () {
-
-    console.log("RENDERING CARDS:   ", apiData); //!! REMOVE
-    const photos = apiData.photo;
-
-    return photos.map((photo, i) => {
-      console.log(photo[`url_${sizeCode}`]);
-      return <Card
-        title={photo.title}
-        authorUrl={photo.authorUrl}
-        author={photo.ownername}
-        photoUrl={photo[`url_${sizeCode}`]}
-        description={photo.description._content}
-        tags = {photo.tags}
-        key={photo.id} />
-    })
+  function createCard (photo) {
+    return <Card
+      title={photo.title}
+      authorUrl={photo.authorUrl}
+      author={photo.ownername}
+      photoUrl={photo[`url_${sizeCode}`]}
+      description={photo.description._content}
+      tags={photo.tags}
+    />
   }
-
 
 
 
   return (
     <main>
-
-      {/* <div className="test-container">
-        <img className="test-photo" src="https://live.staticflickr.com/65535/51059788722_8610964044_w.jpg" alt="" />
-      </div> */}
       <h1>Flickr Photo Stream</h1>
-      <input className="search" placeholder="Search..." />
+      <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
       <section className="cards-container">
         {!loading
-          ? renderCards()
+          ? apiData.photo.map((photo, i) => {
+            return i + 1 === foundPhotos.length
+              ? <div key={photo.id + i} ref={lastCardRef}>
+                {createCard(photo)}
+              </div>
+              : <div key={photo.id + i} >
+                {createCard(photo)}
+              </div>
+          })
           : <p>Loading...</p>}
       </section>
     </main>
