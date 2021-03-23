@@ -1,0 +1,13 @@
+h1 {
+  font-family: "Noto Serif", serif;
+  font-size: 4em;
+}
+
+.cards-container {
+  padding: 50vh 10% 0 10%;
+  display: grid;
+  grid-template-columns: repeat(4, 15em);
+  grid-auto-rows: auto;
+  gap: 5rem;
+  min-width: 70%;
+}
