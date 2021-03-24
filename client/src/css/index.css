@@ -3,3 +3,7 @@
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
+
+body ::selection {
+  background: rgba(37, 192, 159, 0.404);
+}

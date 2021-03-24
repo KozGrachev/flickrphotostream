@@ -10,7 +10,15 @@ export default function Card ({ title, photoUrl, author, authorUrl, description,
 
   function renderTags () {
     return tags.split(' ').map((tag, i) => {
-      return <li key={tag+i}><div className="tag-text">{ tag}</div><button >+</button></li>
+      return <li key={tag + i} onMouseEnter={(e) => {
+        e.stopPropagation();
+      }}>
+        <div className="tag-text">
+          {tag}
+        </div>
+        <button onMouseEnter={(e) => {
+          e.stopPropagation();
+        }}>+</button></li>
     })
   }
 
@@ -25,11 +33,13 @@ export default function Card ({ title, photoUrl, author, authorUrl, description,
               <i>by <a href={authorUrl} >{author}</a></i>
             </div>
           </div>
-          <p className="description">
-            {/* {description} */}
-          </p>
+          <div className="description-container">
+            {/* <p className="description"> */}
+              {description}
+            {/* </p> */}
+          </div>
           <ul className="tags-list">{renderTags()}
-            <div className="shadow-box"></div>
+            <div className="shadow-box" />
           </ul>
         </figcaption>
       </figure>

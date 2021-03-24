@@ -1,0 +1,54 @@
+@mixin input-style--button {
+  border: 0px solid transparent;
+
+  transition-property: box-shadow background-color border;
+  transition-duration: 200ms;
+
+  &:hover {
+    box-shadow: 0 0 0 3px rgb(208, 234, 231);
+  }
+
+  &:active {
+    box-shadow: 0 0 0 1px rgb(240, 240, 240);
+    // border: 1px solid rgb(240, 240, 240);
+    background: white;
+    // box-shadow: none;
+  }
+
+  &:focus {
+    outline: none;
+
+    border: 1px solid rgba(37, 192, 159, 0.404);
+    box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+  }
+}
+
+
+@mixin input-style--text {
+  border: 0px solid transparent;
+
+  transition-property: box-shadow background border;
+  transition-duration: 200ms;
+
+  &:hover {
+    border: 1px solid rgb(240, 240, 240);
+    box-shadow: 0 0 0 3px rgb(208, 234, 231);
+    background: white;
+  }
+
+
+  &:focus {
+    outline: none;
+    background: white;
+    border: 1px solid rgb(32, 155, 141);
+    box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+  }
+
+  &:active {
+    // box-shadow: 0 0 0 3px rgb(240, 240, 240);
+    // border: 1px solid rgb(32, 155, 141);
+    border: 1px solid rgb(240, 240, 240);
+    background: white;
+    box-shadow: none;
+  }
+}

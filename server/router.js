@@ -10,36 +10,32 @@ router.get('/feed/', async (req, res) => {
 
 });
 
-router.get('/interesting/:size', async (req, res) => {
+router.get('/interesting/:pagenum', async (req, res) => {
   console.log('GET REQUEST: interesting');
-  const { size } = req.params;
+  const { size, pageNum } = req.params;
 
-  const extras = `&extras=url_${size}%2C+description%2C+tags%2C+owner_name`
-  const url = `${baseUrl}/rest/?api_key=${process.env.API_KEY + querySettings}&method=flickr.interestingness.getList&per_page=1${extras}`;
-
+  // const url = `${baseUrl}/rest/?api_key=${process.env.API_KEY + querySettings}&method=flickr.interestingness.getList&per_page=10${extras}`;
+  const url = baseUrl + '/rest/?' + new URLSearchParams({
+    extras: ['url_n', 'url_w', 'url_c', 'description', 'tags', 'owner_name'],
+    api_key: process.env.API_KEY,
+    method: 'flickr.interestingness.getList',
+    format: 'json',
+    nojsoncallback: 1,
+    per_page: 10,
+    page: pageNum
+  }).toString();
   const fetchRes = await fetch(url);
   const jsonRes = await fetchRes.json();
   res.send(jsonRes);
 })
-
-router.get('/getUserUrl/:id', async (req, res) => {
-  const { id } = req.params;
-
-  const url = `${baseUrl}/rest/?method=flickr.urls.getUserProfile&api_key=${process.env.API_KEY}&user_id=${id + querySettings}`;
-
-  const fetchRes = await fetch(url);
-  const jsonRes = await fetchRes.json();
-  res.send(jsonRes);
-});
-
 
 router.get('/search/:query/:pageNum', async (req, res) => {
   const { query, pageNum } = req.params;
   const url = baseUrl + '/rest/?' + new URLSearchParams({
     text: query,
     page: pageNum,
-    extras: ['url_m', 'description', 'tags', 'owner_name'],
-    api_key: 'fced83294eb6fb247c8febeb9c10770d',
+    extras: ['url_n', 'url_w', 'url_c', 'description', 'tags', 'owner_name'],
+    api_key: process.env.API_KEY,
     method: 'flickr.photos.search',
     format: 'json',
     nojsoncallback: 1,

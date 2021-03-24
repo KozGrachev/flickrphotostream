@@ -6,6 +6,9 @@
 
 
 body {
+  ::selection {
+    background: rgba(37, 192, 159, 0.404);
+  }
 }
 
 

@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 const url = "http://localhost:3010";
 
-export default function useSearch (query, pageNum) {
-  const controller = new AbortController();
-  const { signal } = controller;
-  let timeLimit;
+export default function useSearch (path, pageNum, query) {
 
   const [searching, setSearching] = useState(true);
   const [error, setError] = useState(false);
@@ -14,14 +11,16 @@ export default function useSearch (query, pageNum) {
   useEffect(() => {
     setSearching(true);
     setError(false);
+    let timeLimit;
+    const controller = new AbortController();
+    const { signal } = controller;
 
     async function searchFetch () {
       let res;
 
       try {
-        res = await fetch(url + `/search/${query}/${pageNum}`, {signal});
+        res = await fetch(url + `/${path}/${query}/${pageNum}`, {signal});
         const jsonRes = await res.json();
-        console.log('USING USESEARCH!!!!', query)
         console.log('JSON RESPONSE:::   ', jsonRes);
         setFoundPhotos(currentPhotos => {
           return [...new Set([...currentPhotos, ...jsonRes.photos.photo])]
@@ -38,6 +37,13 @@ export default function useSearch (query, pageNum) {
       }
     }
 
+    function debounceFunction (func) {
+      clearTimeout(timeLimit);
+
+      timeLimit = setTimeout(() => {
+        func()
+      }, 1000);
+    }
     query && debounceFunction(searchFetch);
 
     return () => controller.abort();
@@ -48,13 +54,6 @@ export default function useSearch (query, pageNum) {
     setFoundPhotos([]);
   }, [query]);
 
-  function debounceFunction (func) {
-    clearTimeout(timeLimit);
-
-    timeLimit = setTimeout(() => {
-      func()
-    }, 1000);
-  }
 
   return {searching, error, foundPhotos, hasMore};
 }
