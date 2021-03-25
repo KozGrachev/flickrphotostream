@@ -52,7 +52,8 @@ export default function useSearch (path, pageNum, query) {
 
   useEffect(() => {
     setFoundPhotos([]);
-  }, [query]);
+
+  }, [searchQuery]);
 
 
   return {searching, error, foundPhotos, hasMore};

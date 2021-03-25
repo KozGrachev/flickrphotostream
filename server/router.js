@@ -21,7 +21,7 @@ router.get('/interesting/:pagenum', async (req, res) => {
     method: 'flickr.interestingness.getList',
     format: 'json',
     nojsoncallback: 1,
-    per_page: 10,
+    per_page: 50,
     page: pageNum
   }).toString();
   const fetchRes = await fetch(url);
@@ -39,7 +39,7 @@ router.get('/search/:query/:pageNum', async (req, res) => {
     method: 'flickr.photos.search',
     format: 'json',
     nojsoncallback: 1,
-    per_page: 10
+    per_page: 50
   }).toString();
 
   console.log('SEARCHING :::    ', query)

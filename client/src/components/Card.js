@@ -2,25 +2,11 @@ import React, { useEffect } from 'react';
 import '../css/Card.css';
 
 
-export default function Card ({ title, photoUrl, author, authorUrl, description, tags }) {
+export default function Card ({ title, photoUrl, author, authorUrl, description, tags, filterHandler }) {
 
   useEffect(() => {
 
   }, []);
-
-  function renderTags () {
-    return tags.split(' ').map((tag, i) => {
-      return <li key={tag + i} onMouseEnter={(e) => {
-        e.stopPropagation();
-      }}>
-        <div className="tag-text">
-          {tag}
-        </div>
-        <button onMouseEnter={(e) => {
-          e.stopPropagation();
-        }}>+</button></li>
-    })
-  }
 
   return (
     <div className="card-container">
@@ -35,10 +21,12 @@ export default function Card ({ title, photoUrl, author, authorUrl, description,
           </div>
           <div className="description-container">
             {/* <p className="description"> */}
-              {description}
+            {description}
             {/* </p> */}
           </div>
-          <ul className="tags-list">{renderTags()}
+          <ul className="tags-list">{tags.split(' ').map((tag, i) => {
+            return <Tag tagText={tag} filterHandler={filterHandler} />
+          })}
             <div className="shadow-box" />
           </ul>
         </figcaption>

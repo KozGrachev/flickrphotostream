@@ -8,57 +8,74 @@
 .search-panel {
   display: flex;
   flex-direction: column;
-  height: 5rem;
+  // height: 5rem;
 
   .search {
     @include mix.input-style--text;
     padding: 0 2em;
     background: rgb(241, 241, 241);
+
     width: 30rem;
     height: 2rem;
     border-radius: 1rem;
     align-self: center;
+    margin: 2em;
   }
 
   .filter-tags-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    min-width: 0rem;
+    height: 3em;
+    border: 1px solid transparent;
+    transition-property: min-width border;
+    transition-duration: 1000ms;
 
+    &.visible{
+      border-top: 1px solid rgb(214, 214, 214);
+      border-bottom: 1px solid rgb(214, 214, 214);
+      min-width: 30rem;
+      max-width: min-content;
+    }
   }
 }
 
+.title-panel {
+  margin-left: 5rem;
+  // top: 20%;
+  // border: 3px solid red;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 30rem;
+  z-index: 1;
+  pointer-events: none;
+
+  h4 {
+    color: rgb(95, 95, 95);
+  }
+
+  h1 {
+    color: rgb(32, 155, 141);
+    font-family: 'Noto Serif', serif;
+    font-size: 4em;
+  }
+}
 
 main {
   display: flex;
   flex-direction: column;
 
 
-  .title-panel {
-    margin-left: 5rem;
-    // top: 20%;
-    // border: 3px solid red;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 30rem;
-    z-index: 1;
-    pointer-events: none;
-
-    h4 {
-      color: rgb(95, 95, 95);
-    }
-
-    h1 {
-      color: rgb(32, 155, 141);
-      font-family: 'Noto Serif', serif;
-      font-size: 4em;
-    }
-  }
 
 
 
   .cards-container {
     height: 200%;
     // padding-left: 5rem;
-    padding: 10vh 10% 5rem 10%;
+    padding: 10vh 10% 5rem 5rem;
     display: grid;
     flex-grow: 1;
 
