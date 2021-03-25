@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '../css/Card.css';
+import Tag from './Tag';
 
 
 export default function Card ({ title, photoUrl, author, authorUrl, description, tags }) {
@@ -10,15 +11,7 @@ export default function Card ({ title, photoUrl, author, authorUrl, description,
 
   function renderTags () {
     return tags.split(' ').map((tag, i) => {
-      return <li key={tag + i} onMouseEnter={(e) => {
-        e.stopPropagation();
-      }}>
-        <div className="tag-text">
-          {tag}
-        </div>
-        <button onMouseEnter={(e) => {
-          e.stopPropagation();
-        }}>+</button></li>
+      return <Tag tagText={tag}/>
     })
   }
 

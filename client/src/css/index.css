@@ -20,7 +20,6 @@ body ::selection {
 
 ::-webkit-scrollbar-thumb {
   background: #209b8d;
-  border-radius: 5px;
   height: 5px;
 }
 
