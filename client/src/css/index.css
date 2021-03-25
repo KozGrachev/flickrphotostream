@@ -7,3 +7,23 @@
 body ::selection {
   background: rgba(37, 192, 159, 0.404);
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f4fe;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #209b8d;
+  border-radius: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2b756d;
+}
