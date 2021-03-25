@@ -10,9 +10,9 @@ router.get('/feed/', async (req, res) => {
 
 });
 
-router.get('/interesting/:pagenum', async (req, res) => {
+router.get('/interesting/:pageNum', async (req, res) => {
   console.log('GET REQUEST: interesting');
-  const { size, pageNum } = req.params;
+  const { pageNum } = req.params;
 
   // const url = `${baseUrl}/rest/?api_key=${process.env.API_KEY + querySettings}&method=flickr.interestingness.getList&per_page=10${extras}`;
   const url = baseUrl + '/rest/?' + new URLSearchParams({

@@ -2,15 +2,15 @@ import './css/App.css';
 // import { fetchFlickr } from "./ApiService"
 import { storeCache, assignCache } from './cache';
 import useSearch from "./hooks/useSearch"
+import useFeed from "./hooks/useFeed"
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Card from './components/Card';
 import Tag from './components/Tag';
 
+
 function App () {
   const sizeCode = 'w';
 
-  const [apiData, setApiData] = useState({ photos: [] });
-  const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [searchPageNum, setSearchPageNum] = useState(1);
   const [feedPageNum, setFeedPageNum] = useState(1);
@@ -71,7 +71,8 @@ function App () {
   const observer = useRef();
 
   const lastCardRef = useCallback(lastCard => {
-    if (loading) return;
+    if (loadingSearch || loadingFeed) return;
+
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
 
@@ -83,19 +84,10 @@ function App () {
           : setFeedPageNum(pn => pn + 1);
       }
     });
+
     if (lastCard) observer.current.observe(lastCard);
-  }, [loading, hasMore]);
 
-  useEffect(() => {
-    async function getData () {
-      const data = (await fetchFlickr('/interesting/', pageNum)).photos;
-
-      setApiData(data);
-      setLoading(false);
-    }
-    getData();
-  }, []);
-
+  }, [loadingSearch, loadingFeed, searchHasMore, feedHasMore, query]);
 
   console.log(foundPhotos.map((p, i) => i + '   ' + p.title + '   ' + p.id))
 
@@ -121,6 +113,7 @@ function App () {
     return coll.map((photo, i) => {
       return i + 1 === coll.length
         ? <div key={photo.id + i} ref={lastCardRef}>
+          **** LAST ONE ****
           {createCard(photo)}
         </div>
         : <div key={photo.id + i} >

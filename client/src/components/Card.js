@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '../css/Card.css';
+import Tag from './Tag';
 
 
 export default function Card ({ title, photoUrl, author, authorUrl, description, tags, filterHandler }) {

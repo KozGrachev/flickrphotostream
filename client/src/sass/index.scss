@@ -11,7 +11,28 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: #f5f4fe;
+  border-radius: 2px;
+  // height: 3px;
+  // width: 3px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(32, 155, 141);
+  // border-radius: 2px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(43, 117, 109);
+}
 
 // html {
 //   font-size: 62.5%;

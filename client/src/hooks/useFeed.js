@@ -1,31 +1,30 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react'
 import { cacheQuery } from '../cache';
 const url = "http://localhost:3010";
 
-export default function useSearch (pageNum, searchQuery) {
+export default function useFeed (path, pageNum) {
 
   const [searching, setSearching] = useState(true);
   const [error, setError] = useState(false);
   const [foundPhotos, setFoundPhotos] = useState([]);
   const [hasMore, setHasMore] = useState(false)
-  // const cachedSearch = useMemo(() => )
 
   useEffect(() => {
     setSearching(true);
     setError(false);
-    let timeLimit;
     const controller = new AbortController();
     const { signal } = controller;
 
     async function searchFetch () {
       try {
-        const query = url + `/search/${searchQuery}/${pageNum}`;
+        const query = url + `/${path}/${pageNum}`;
         const jsonRes = await cacheQuery(query, async (q) => {
           console.log('HANDLING QUERY');
-          const r = await fetch(q, { signal });
+          const r = await fetch(q, {signal});
           const j = await r.json();
           return j;
         });
+        
         console.log('JSON RESPONSE:::   ', jsonRes);
         setFoundPhotos(currentPhotos => {
           return [...new Set([...currentPhotos, ...jsonRes.photos.photo])]
@@ -35,30 +34,16 @@ export default function useSearch (pageNum, searchQuery) {
         setSearching(false);
       } catch (error) {
         setError(true);
-        if (error === 'AbortError') {
-          console.log('Fetch aborted!!');
-          return;
-        }
       }
     }
-
-    function debounceFunction (func) {
-      clearTimeout(timeLimit);
-
-      timeLimit = setTimeout(() => {
-        func()
-      }, 500);
-    }
-    searchQuery && debounceFunction(searchFetch);
+    searchFetch();
 
     return () => controller.abort();
-
-  }, [searchQuery, pageNum]);
+  }, [pageNum, path]);
 
   useEffect(() => {
     setFoundPhotos([]);
-  }, [searchQuery]);
+  }, [path]);
 
-
-  return {searching, error, foundPhotos, hasMore};
+  return { searching, error, foundPhotos, hasMore };
 }
