@@ -21,6 +21,12 @@
     border: 1px solid rgba(37, 192, 159, 0.404);
     box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
   }
+
+  &:disabled {
+    border:none;
+    box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+    cursor: not-allowed;
+  }
 }
 
 

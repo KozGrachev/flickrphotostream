@@ -49,7 +49,7 @@ export default function useSearch (pageNum, searchQuery) {
         func()
       }, 500);
     }
-    searchQuery && debounceFunction(searchFetch);
+    if(searchQuery && searchQuery.length > 2) debounceFunction(searchFetch);
 
     return () => controller.abort();
 
@@ -60,5 +60,5 @@ export default function useSearch (pageNum, searchQuery) {
   }, [searchQuery]);
 
 
-  return {searching, error, foundPhotos, hasMore};
+  return { searching, error, foundPhotos, hasMore };
 }

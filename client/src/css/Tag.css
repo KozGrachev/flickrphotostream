@@ -22,8 +22,16 @@ li:focus {
   border: 1px solid rgba(37, 192, 159, 0.404);
   box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
 }
+li:disabled {
+  border: none;
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+  cursor: not-allowed;
+}
 li .tag-text {
   color: #209b8d;
   font-size: 0.65rem;
   margin: 0 0.65rem;
+}
+li button.hidden {
+  display: none;
 }

@@ -26,3 +26,14 @@ body ::selection {
 ::-webkit-scrollbar-thumb:hover {
   background: #2b756d;
 }
+
+a {
+  color: #08ac98;
+}
+a:visited {
+  color: #246e66;
+  font-weight: 400;
+}
+a:hover {
+  text-decoration: underline;
+}

@@ -8,7 +8,7 @@
   transform: scale(1.1);
 }
 .card-container img {
-  height: 10.5em;
+  height: 15em;
   width: 100%;
   object-fit: cover;
 }
@@ -18,16 +18,7 @@
 .card-container .details .title {
   text-transform: uppercase;
   text-decoration: none;
-  color: black;
-  color: #08ac98;
   font-weight: 700;
-}
-.card-container .details .title:visited {
-  color: #246e66;
-  font-weight: 400;
-}
-.card-container .details .title:hover {
-  text-decoration: underline;
 }
 .card-container .details .author {
   font-size: 0.8rem;
@@ -38,12 +29,13 @@
   margin-right: 0.5em;
 }
 .card-container .description-container {
-  height: 4.2rem;
+  height: 3rem;
   margin-top: 2rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  font-size: 0.7em;
 }
 .card-container .tags-list {
   margin-top: 1em;
@@ -87,4 +79,9 @@ button:focus {
   outline: none;
   border: 1px solid rgba(37, 192, 159, 0.404);
   box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+}
+button:disabled {
+  border: none;
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+  cursor: not-allowed;
 }

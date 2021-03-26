@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../css/Card.css';
 import Tag from './Tag';
 
 
-export default function Card ({ title, photoUrl, author, authorUrl, description, tags, filterHandler }) {
+export default function Card ({ title, photoUrl, author, authorUrl, description, tags, filterHandler, filterTags }) {
+
+
+  const descriptionRef = useRef();
 
   useEffect(() => {
-
+    descriptionRef.current.innerHTML = description;
   }, []);
 
   return (
@@ -20,13 +23,13 @@ export default function Card ({ title, photoUrl, author, authorUrl, description,
               <i>by <a href={authorUrl} >{author}</a></i>
             </div>
           </div>
-          <div className="description-container">
-            {/* <p className="description"> */}
-            {description}
-            {/* </p> */}
-          </div>
+          <div className="description-container" ref={descriptionRef} />
           <ul className="tags-list">{tags.split(' ').map((tag, i) => {
-            return <Tag tagText={tag} filterHandler={filterHandler} />
+            return <Tag
+              tagText={tag}
+              filterHandler={filterHandler}
+              isInCard={true}
+              tagIsSelected={filterTags.length && filterTags.includes(tag)} />
           })}
             <div className="shadow-box" />
           </ul>

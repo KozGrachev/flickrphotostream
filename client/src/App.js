@@ -1,5 +1,4 @@
 import './css/App.css';
-// import { fetchFlickr } from "./ApiService"
 import { storeCache, assignCache } from './cache';
 import useSearch from "./hooks/useSearch"
 import useFeed from "./hooks/useFeed"
@@ -40,8 +39,7 @@ function App () {
 
   useEffect(() => {
     console.log('PHOTOS::', feedPhotos)
-
-    if (query.length) {
+    if (query.length > 2) {
       if (filterTags.length) {
         setPhotosToDisplay(filterByTags(foundPhotos));
       } else setPhotosToDisplay(foundPhotos);
@@ -64,9 +62,11 @@ function App () {
       return newColl;
     }
 
-  }, [feedPhotos, filterTags, foundPhotos, query.length]);
+  }, [feedPhotos, filterTags, foundPhotos, query]);
 
-
+  useEffect(() => {
+    document.querySelector('.cards-container').scrollLeft = 0;
+  },[filterTags, query])
 
   const observer = useRef();
 
@@ -106,6 +106,7 @@ function App () {
       description={photo.description._content}
       filterHandler={addFilterTag}
       tags={photo.tags}
+      filterTags={filterTags}
     />
   }
 

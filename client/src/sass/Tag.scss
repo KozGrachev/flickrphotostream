@@ -15,12 +15,11 @@ li {
 
   cursor: pointer;
 
+  &.selected {
+    // background-color: red;
+  }
 
   @include mix.input-style--button;
-
-
-
-
 
   .tag-text {
     color: rgb(32, 155, 141);
@@ -30,7 +29,10 @@ li {
     // border-radius: ;
     // list-style: none;
     margin: 0 var.$tags-size*0.5;
+
   }
 
-
+  button.hidden {
+    display: none;
+  }
 }
