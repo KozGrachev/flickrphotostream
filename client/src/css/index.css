@@ -14,7 +14,7 @@ body ::selection {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f4fe;
+  background: transparent;
   border-radius: 2px;
 }
 

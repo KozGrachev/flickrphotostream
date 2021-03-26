@@ -16,12 +16,12 @@ router.get('/interesting/:pageNum', async (req, res) => {
 
   // const url = `${baseUrl}/rest/?api_key=${process.env.API_KEY + querySettings}&method=flickr.interestingness.getList&per_page=10${extras}`;
   const url = baseUrl + '/rest/?' + new URLSearchParams({
-    extras: ['url_n', 'url_w', 'url_c', 'description', 'tags', 'owner_name'],
+    extras: ['url_n', 'url_z', 'url_l', 'description', 'tags', 'owner_name'],
     api_key: process.env.API_KEY,
     method: 'flickr.interestingness.getList',
     format: 'json',
     nojsoncallback: 1,
-    per_page: 50,
+    per_page: 20,
     page: pageNum
   }).toString();
   const fetchRes = await fetch(url);
@@ -39,7 +39,7 @@ router.get('/search/:query/:pageNum', async (req, res) => {
     method: 'flickr.photos.search',
     format: 'json',
     nojsoncallback: 1,
-    per_page: 50
+    per_page: 20
   }).toString();
 
   console.log('SEARCHING :::    ', query)

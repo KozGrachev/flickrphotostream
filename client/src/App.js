@@ -8,7 +8,9 @@ import Tag from './components/Tag';
 
 
 function App () {
-  const sizeCode = 'w';
+  const smallSizeCode = 'n';
+  const mediumSizeCode = 'z';
+  const largeSizeCode = 'l';
 
   const [query, setQuery] = useState('');
   const [searchPageNum, setSearchPageNum] = useState(1);
@@ -102,7 +104,7 @@ function App () {
       title={photo.title}
       authorUrl={`https://www.flickr.com/people/${photo.owner}/`}
       author={photo.ownername}
-      photoUrl={photo[`url_${sizeCode}`]}
+      photoUrls={{ small: photo[`url_${smallSizeCode}`], medium: photo[`url_${mediumSizeCode}`], large: photo[`url_${largeSizeCode}`]}}
       description={photo.description._content}
       filterHandler={addFilterTag}
       tags={photo.tags}
@@ -143,22 +145,24 @@ function App () {
 
   return (
     <div className="app-container">
-      <div className="title-panel">
-        <h4>Konstantin Grachev</h4>
-        <h1>Flickr Photo <br /> Stream</h1>
-      </div>
-      <section className="search-panel">
-        <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
-        <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
-          {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
+      <section className="top">
+        <div className="title-panel">
+          {/* <h4>Konstantin Grachev</h4> */}
+          <h1>Flickr</h1> <h1>Photo Stream</h1>
+        </div>
+        <div className="search-panel">
+          <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
+          <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
+            {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
+          </div>
         </div>
       </section>
-      <main>
-        <section className="cards-container">
+      <main className="cards-container">
+
           {!loadingFeed || !loadingSearch
             ? renderCards(photosToDisplay)
               : <p>Loading...</p>}
-        </section>
+
       </main>
     </div>
   );

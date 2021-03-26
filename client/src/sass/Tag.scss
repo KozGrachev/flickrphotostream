@@ -15,8 +15,13 @@ li {
 
   cursor: pointer;
 
-  &.selected {
-    // background-color: red;
+  // &.selected {
+  //   background-color: rgb(240, 240, 240);
+  //   // background-color: red;
+  // }
+
+  &.filter {
+    // background-color: rgba(255, 255, 255, 0.692);
   }
 
   @include mix.input-style--button;

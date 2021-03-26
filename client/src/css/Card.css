@@ -1,16 +1,63 @@
 .card-container {
   padding: 1em;
-  transition-property: box-shadow transform;
+  transition-property: box-shadow transform background width height;
   transition-duration: 200ms;
+  background: transparent;
 }
 .card-container:hover {
   box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
   transform: scale(1.1);
 }
-.card-container img {
+.card-container.focused {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  min-height: 100vh;
+  box-shadow: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+.card-container.focused:hover {
+  transition-duration: 400ms;
+  transform: unset;
+}
+.card-container.focused figure {
+  margin: auto 0;
+  position: relative;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  max-width: min-content;
+  box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+}
+.card-container.focused figure img {
+  width: auto;
+  height: auto;
+}
+.card-container.focused figure .description-container {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+}
+.card-container.focused figure .tags-list {
+  display: flex;
+  max-height: 10em;
+  overflow-y: scroll;
+}
+.card-container.focused figure .shadow-box {
+  visibility: hidden;
+}
+.card-container.unfocused img {
   height: 15em;
   width: 100%;
   object-fit: cover;
+}
+.card-container figure {
+  background: white;
 }
 .card-container .details {
   margin-top: 2rem;
@@ -39,7 +86,6 @@
 }
 .card-container .tags-list {
   margin-top: 1em;
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
