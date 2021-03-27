@@ -13,9 +13,9 @@ export default function Tag ({ tagText, filterHandler, isInCard, tagIsSelected }
     <li
       className={`${isSelected && 'selected'} ${!isInCard &&  'filter'}`}
       key={tagText}
-      onclick={(e) => {
-        e.stopPropagation();
-      }}
+      // onClick={(e) => {
+      //   e.stopPropagation();
+      // }}
     >
       <div className="tag-text">
         {tagText}

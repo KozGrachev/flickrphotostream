@@ -54,14 +54,13 @@
   justify-content: center;
   align-items: center;
   min-width: 0rem;
-  height: 0;
+  height: 3em;
   border: 1px solid transparent;
-  transition-property: min-width border height margin;
+  transition-property: min-width border;
   transition-duration: 1000ms;
 }
 .search-panel .filter-tags-container.visible {
   margin: 2rem auto 0;
-  height: 3em;
   border-top: 1px solid #d6d6d6;
   border-bottom: 1px solid #d6d6d6;
   min-width: 30rem;
@@ -86,7 +85,7 @@
 }
 
 .cards-container {
-  padding: 10% 10% 0 10%;
+  padding: 5rem 10% 0 10%;
   display: grid;
   gap: 2rem;
   width: 1fr;

@@ -1,50 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cacheQuery } from '../cache';
 const url = "http://localhost:3010";
 
-export default function useFeed (path, pageNum, searchQuery, filterTags) {
+export default function useFeed (path, pageNum, filterTags) {
 
   const [searching, setSearching] = useState(true);
   const [error, setError] = useState(false);
   const [foundPhotos, setFoundPhotos] = useState([]);
-  const [hasMore, setHasMore] = useState(false)
-
-  // useEffect(() => {
-  //   console.log("@@@@@@@@@@@@@@@  CLEARING FEED PHOTOS")
-  //   setFoundPhotos([]);
-  // }, [path, searchQuery]);
+  const [hasMore, setHasMore] = useState(false);
+  const [newSearch, setNewSearch] = useState(true)
 
   useEffect(() => {
-    console.log("@@@@@@@@@@@@@@@ NO FILTER TAGS --  CLEARING FEED PHOTOS")
-    if (filterTags === []) setFoundPhotos([]);
+    console.log('filterTags:  ', filterTags);
+    if (filterTags.length === 0) {
+      setNewSearch(true);
+      setFoundPhotos([]);
+    }
   }, [filterTags]);
 
-
-
   useEffect(() => {
-    console.log('FOUND PHOTOS ::: ', foundPhotos)
     setSearching(true);
     setError(false);
     const controller = new AbortController();
     const { signal } = controller;
 
     async function searchFetch () {
-
-
       try {
-        const query = url + `/${path}/${pageNum}`;
+        const query = url + `/${path}/${newSearch ? 1 : pageNum}`;
         const jsonRes = await cacheQuery(query, async (q) => {
-          // console.log('HANDLING QUERY', query);
-          const r = await fetch(q, {signal});
+          const r = await fetch(q, { signal });
           const j = await r.json();
           return j;
         });
 
-        // console.log('JSON RESPONSE:::   ', jsonRes);
+        console.log('JSON RESPONSE:::   ', jsonRes);
         setFoundPhotos(currentPhotos => {
+          if (newSearch) {
+            return jsonRes.photos.photo;
+          }
+
           return [...new Set([...currentPhotos, ...jsonRes.photos.photo])]
         });
 
+        setNewSearch(false);
         setHasMore(jsonRes.photos.photo.length > 0);
         setSearching(false);
       } catch (error) {
@@ -54,8 +52,7 @@ export default function useFeed (path, pageNum, searchQuery, filterTags) {
     searchFetch();
 
     return () => controller.abort();
-  }, [pageNum, path]);
-
+  }, [pageNum, path, filterTags]);
 
 
   return { searching, error, foundPhotos, hasMore };

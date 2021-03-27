@@ -31,7 +31,8 @@ export default function Card ({ title, photoUrls, author, authorUrl, description
               tagText={tag}
               filterHandler={filterHandler}
               isInCard={true}
-              tagIsSelected={filterTags.length && filterTags.includes(tag)} />
+              tagIsSelected={filterTags.length && filterTags.includes(tag)}
+              key={tag+i} />
           })}
             <div className="shadow-box" />
           </ul>

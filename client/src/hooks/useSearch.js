@@ -49,13 +49,14 @@ export default function useSearch (pageNum, searchQuery) {
         func()
       }, 500);
     }
-    if(searchQuery && searchQuery.length > 2) debounceFunction(searchFetch);
+    if (searchQuery && searchQuery.length > 2) debounceFunction(searchFetch);
 
     return () => controller.abort();
 
   }, [searchQuery, pageNum]);
 
   useEffect(() => {
+    console.log('CLEARING FOUND PHOTOS IN SEARCH', searchQuery);
     setFoundPhotos([]);
   }, [searchQuery]);
 

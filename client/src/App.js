@@ -26,9 +26,13 @@ function App () {
   //   window.addEventListener('beforeunload', storeCache);
   // }, []);
 
-  // useEffect(() => {
 
-  // },[query, filterTags])
+
+  useEffect(() => {
+    if (filterTags.length === 0) {
+      setFeedPageNum(1);
+    }
+  }, [filterTags])
 
   const {
     foundPhotos,
@@ -41,11 +45,10 @@ function App () {
     loading: loadingFeed,
     error: feedError,
     hasMore: feedHasMore,
-  } = useFeed('interesting', feedPageNum, query, filterTags);
+  } = useFeed('interesting', feedPageNum, filterTags, );
+
 
   useEffect(() => {
-    // if (query === '' || filterTags === []) feedPhotos = [];
-
     console.log('PHOTOS::', feedPhotos)
     if (query.length > 2) {
       if (filterTags.length) {
@@ -56,7 +59,6 @@ function App () {
         setPhotosToDisplay(filterByTags(feedPhotos));
       } else setPhotosToDisplay(feedPhotos);
     }
-
 
     function filterByTags (coll) {
       let newColl = coll;
@@ -70,10 +72,12 @@ function App () {
       return newColl;
     }
 
-  }, [feedPhotos, foundPhotos, filterTags, query]);
+  }, [feedPhotos, filterTags, foundPhotos, query]);
 
   const cardsContainerRef = useRef();
+
   useEffect(() => {
+    document.querySelector('html').scrollTop =240;
     cardsContainerRef.current.scrollLeft = 0;
   }, [filterTags, query])
 
@@ -133,8 +137,6 @@ function App () {
   }
 
   function addFilterTag (tag) {
-    console.log('CALLED FUNCTION: addFilterTag', tag)
-
     setFilterTags(currentTags => {
       if (!currentTags.includes(tag)) {
         return [...currentTags, tag];
@@ -143,22 +145,20 @@ function App () {
   }
 
   function removeFilterTag (tag) {
-    console.log('CALLED FUNCTION: removeFilterTag', tag)
     setFilterTags(currentTags => {
       return currentTags.filter(t => t !== tag)
 
     });
   }
-
   return (
     <div className="app-container">
       <section className="top">
         <div className="title-panel">
-          {/* <h4>Konstantin Grachev</h4> */}
           <h1>Flickr</h1> <h1>Photo Stream</h1>
         </div>
       </section>
       <div className="search-panel">
+        <button onClick={()=> console.log('#############################################################')}> LOLOLOL </button>
         <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
         <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
           {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
