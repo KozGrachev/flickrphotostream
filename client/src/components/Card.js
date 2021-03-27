@@ -12,11 +12,9 @@ export default function Card ({ title, photoUrls, author, authorUrl, description
     descriptionRef.current.innerHTML = description;
   }, []);
 
-  console.log(photoUrls);
-
   return (
     <div className={`card-container ${isFocused ? 'focused' : 'unfocused'}`} onClick={() => setIsFocused(isFoc => !isFoc)}>
-      
+
       <figure>
         <img src={isFocused ? photoUrls.medium : photoUrls.small} alt={title} />
         <figcaption>

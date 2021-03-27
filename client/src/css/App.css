@@ -1,23 +1,26 @@
 .app-container {
   padding-top: 5rem;
-  display: flex;
-  flex-direction: column;
   position: relative;
-  height: 100vh;
 }
 
 .top {
-  display: grid;
+  flex-direction: column;
   grid-template-columns: auto 30rem auto;
   width: 100%;
   height: 10rem;
   grid-template-areas: "title search .";
+  position: sticky;
 }
 
 .search-panel {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  grid-area: search;
+  position: -webkit-sticky;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
 }
 .search-panel .search {
   border: 0px solid transparent;
@@ -25,11 +28,10 @@
   transition-duration: 200ms;
   padding: 0 2em;
   background: #f1f1f1;
-  width: 100%;
+  width: 30rem;
   height: 2rem;
   border-radius: 1rem;
-  align-self: center;
-  margin: 2em;
+  margin: auto;
 }
 .search-panel .search:hover {
   border: 1px solid #f0f0f0;
@@ -51,14 +53,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
   min-width: 0rem;
-  height: 3em;
+  height: 0;
   border: 1px solid transparent;
-  transition-property: min-width border;
+  transition-property: min-width border height margin;
   transition-duration: 1000ms;
 }
 .search-panel .filter-tags-container.visible {
+  margin: 2rem auto 0;
+  height: 3em;
   border-top: 1px solid #d6d6d6;
   border-bottom: 1px solid #d6d6d6;
   min-width: 30rem;
@@ -70,7 +73,6 @@
   margin-left: 5rem;
   display: flex;
   flex-direction: column;
-  position: absolute;
   z-index: 1;
   pointer-events: none;
 }
@@ -84,13 +86,30 @@
 }
 
 .cards-container {
-  display: flex;
-  flex-direction: column;
-  padding: 10vh 10% 5rem 5rem;
+  padding: 10% 10% 0 10%;
   display: grid;
-  flex-grow: 1;
-  grid-auto-columns: 400px;
-  grid-auto-flow: column;
-  gap: 5rem;
-  overflow-x: scroll;
+  gap: 2rem;
+  width: 1fr;
+  justify-self: stretch;
+}
+
+@media (min-width: 1491px) {
+  .cards-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1490px) {
+  .cards-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1110px) {
+  .cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 730px) {
+  .cards-container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

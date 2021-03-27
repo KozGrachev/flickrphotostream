@@ -26,6 +26,10 @@ function App () {
   //   window.addEventListener('beforeunload', storeCache);
   // }, []);
 
+  // useEffect(() => {
+
+  // },[query, filterTags])
+
   const {
     foundPhotos,
     loading: loadingSearch,
@@ -37,9 +41,11 @@ function App () {
     loading: loadingFeed,
     error: feedError,
     hasMore: feedHasMore,
-  } = useFeed('interesting', feedPageNum);
+  } = useFeed('interesting', feedPageNum, query, filterTags);
 
   useEffect(() => {
+    // if (query === '' || filterTags === []) feedPhotos = [];
+
     console.log('PHOTOS::', feedPhotos)
     if (query.length > 2) {
       if (filterTags.length) {
@@ -64,11 +70,12 @@ function App () {
       return newColl;
     }
 
-  }, [feedPhotos, filterTags, foundPhotos, query]);
+  }, [feedPhotos, foundPhotos, filterTags, query]);
 
+  const cardsContainerRef = useRef();
   useEffect(() => {
-    document.querySelector('.cards-container').scrollLeft = 0;
-  },[filterTags, query])
+    cardsContainerRef.current.scrollLeft = 0;
+  }, [filterTags, query])
 
   const observer = useRef();
 
@@ -104,7 +111,7 @@ function App () {
       title={photo.title}
       authorUrl={`https://www.flickr.com/people/${photo.owner}/`}
       author={photo.ownername}
-      photoUrls={{ small: photo[`url_${smallSizeCode}`], medium: photo[`url_${mediumSizeCode}`], large: photo[`url_${largeSizeCode}`]}}
+      photoUrls={{ small: photo[`url_${smallSizeCode}`], medium: photo[`url_${mediumSizeCode}`], large: photo[`url_${largeSizeCode}`] }}
       description={photo.description._content}
       filterHandler={addFilterTag}
       tags={photo.tags}
@@ -150,18 +157,18 @@ function App () {
           {/* <h4>Konstantin Grachev</h4> */}
           <h1>Flickr</h1> <h1>Photo Stream</h1>
         </div>
-        <div className="search-panel">
-          <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
-          <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
-            {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
-          </div>
-        </div>
       </section>
-      <main className="cards-container">
+      <div className="search-panel">
+        <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
+        <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
+          {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
+        </div>
+      </div>
+      <main ref={cardsContainerRef} className="cards-container">
 
-          {!loadingFeed || !loadingSearch
-            ? renderCards(photosToDisplay)
-              : <p>Loading...</p>}
+        {!loadingFeed || !loadingSearch
+          ? renderCards(photosToDisplay)
+          : <p>Loading...</p>}
 
       </main>
     </div>
