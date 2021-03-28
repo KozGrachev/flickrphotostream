@@ -1,5 +1,4 @@
 import './css/App.css';
-import { storeCache, assignCache } from './cache';
 import useSearch from "./hooks/useSearch"
 import useFeed from "./hooks/useFeed"
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -17,16 +16,6 @@ function App () {
   const [feedPageNum, setFeedPageNum] = useState(1);
   const [filterTags, setFilterTags] = useState([]);
   const [photosToDisplay, setPhotosToDisplay] = useState([]);
-
-
-  // useEffect(() => {
-  //   const storedCache = localStorage.getItem('holidayExtras_cache');
-  //   storedCache && assignCache(storedCache);
-
-  //   window.addEventListener('beforeunload', storeCache);
-  // }, []);
-
-
 
   useEffect(() => {
     if (filterTags.length === 0) {
@@ -90,10 +79,8 @@ function App () {
     observer.current = new IntersectionObserver(entries => {
 
       if (entries[0].isIntersecting && (searchHasMore || feedHasMore)) {
-        query ? setSearchPageNum(pn => {
-          console.log("NEXT PAGE ::: ", pn + 1);
-          return pn + 1
-        })
+        query
+          ? setSearchPageNum(pn => pn + 1)
           : setFeedPageNum(pn => pn + 1);
       }
     });
@@ -103,6 +90,7 @@ function App () {
   }, [loadingSearch, loadingFeed, searchHasMore, feedHasMore, query]);
 
   console.log(foundPhotos.map((p, i) => i + '   ' + p.title + '   ' + p.id))
+  // console.log(foundPhotos)
 
   function handleSearch (event) {
     setQuery(event.target.value);
@@ -118,6 +106,8 @@ function App () {
       photoUrls={{ small: photo[`url_${smallSizeCode}`], medium: photo[`url_${mediumSizeCode}`], large: photo[`url_${largeSizeCode}`] }}
       description={photo.description._content}
       filterHandler={addFilterTag}
+      searchHandler={searchByTag}
+      clearFilterTags={clearFilterTags}
       tags={photo.tags}
       filterTags={filterTags}
     />
@@ -127,8 +117,8 @@ function App () {
     return coll.map((photo, i) => {
       return i + 1 === coll.length
         ? <div key={photo.id + i} ref={lastCardRef}>
-          **** LAST ONE ****
           {createCard(photo)}
+          <input type="button" value="Load more..."/>
         </div>
         : <div key={photo.id + i} >
           {createCard(photo)}
@@ -150,6 +140,14 @@ function App () {
 
     });
   }
+
+  function clearFilterTags () {
+    setFilterTags([]);
+  }
+
+  function searchByTag (tag) {
+    setQuery(tag);
+  }
   return (
     <div className="app-container">
       <section className="top">
@@ -158,10 +156,13 @@ function App () {
         </div>
       </section>
       <div className="search-panel">
-        <button onClick={()=> console.log('#############################################################')}> LOLOLOL </button>
         <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
         <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
-          {filterTags.map(tag => <Tag tagText={tag} filterHandler={() => removeFilterTag(tag)} key={tag} />)}
+          {filterTags.map(tag => <Tag
+            tagText={tag}
+            filterHandler={() => removeFilterTag(tag)}
+            searchHandler={searchByTag}
+            key={tag} />)}
         </div>
       </div>
       <main ref={cardsContainerRef} className="cards-container">

@@ -3,7 +3,17 @@ import '../css/Card.css';
 import Tag from './Tag';
 
 
-export default function Card ({ title, photoUrls, author, authorUrl, description, tags, filterHandler, filterTags }) {
+export default function Card ({
+  title,
+  photoUrls,
+  author,
+  authorUrl,
+  description,
+  tags,
+  filterHandler,
+  searchHandler,
+  filterTags,
+  clearFilterTags}) {
 
   const [isFocused, setIsFocused] = useState(false)
   const descriptionRef = useRef();
@@ -30,9 +40,11 @@ export default function Card ({ title, photoUrls, author, authorUrl, description
             return <Tag
               tagText={tag}
               filterHandler={filterHandler}
+              searchHandler={searchHandler}
+              clearFilterTags={clearFilterTags}
               isInCard={true}
               tagIsSelected={filterTags.length && filterTags.includes(tag)}
-              key={tag+i} />
+              key={tag + i} />
           })}
             <div className="shadow-box" />
           </ul>
