@@ -21,10 +21,8 @@
     box-shadow: none;
     z-index: 2;
     display: flex;
-    // align-items: center;
     justify-content: space-between;
     background: white;
-    // border: 3px solid yellow;
     padding: 2rem;
     transition: none;
 
@@ -39,7 +37,6 @@
     }
 
     .close-focused-button {
-      // align-self: flex-end;
       @include mix.input-style--button;
       position: fixed;
       border-radius: 50%;
@@ -92,7 +89,6 @@
       overflow: auto;
     }
 
-
     // LANDSCAPE
     @media (min-width: 120vh) {
       figcaption {
@@ -102,9 +98,7 @@
         padding-left: 2rem;
         border-left: 1px solid var.$grey1;
         position: relative;
-        // flex-direction: column;
       }
-
 
       .description-tags-wrapper {
         position: relative;
@@ -116,8 +110,6 @@
       .description-container {
         height: fit-content;
         max-height: 100%;
-        // height: 300px;
-        // overflow-y: scroll;
       }
 
       .tags-list-wrapper {
@@ -177,14 +169,11 @@
       object-fit: cover;
     }
   }
-
 }
 
 figure {
-  // border: 3px solid red;
   background: white;
 }
-
 
 .details {
   margin-top: 2rem;
@@ -206,7 +195,6 @@ figure {
 
     a {
       @include mix.truncate(1);
-
     }
   }
 }
@@ -214,12 +202,9 @@ figure {
 .description-container {
   @include mix.truncate(3);
   height: 3rem;
-  // border: 1px solid green;
   margin-top: 2rem;
   font-size: 0.7em;
 }
-
-
 
 .tags-list {
   margin-top: 1em;
@@ -237,5 +222,4 @@ figure {
     box-shadow: inset 0 var.$tags-size*-2 var.$tags-size var.$tags-size*-1 rgb(255, 255, 255);
     pointer-events: none;
   }
-
 }

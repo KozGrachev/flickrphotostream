@@ -4,54 +4,31 @@
 li {
   height: var.$tags-size;
   border-radius: var.$tags-size*0.5;
-  // width: var.$tags-size * 10;
-  // border: 1px solid blue;
   background-color: rgb(240, 240, 240);
-  // background-color: rgb(208, 234, 231);
   display: flex;
   align-items: center;
   margin: var.$tags-size * 0.2;
-  // box-sizing: content-box;
-
   cursor: pointer;
-
-  // &.selected {
-  //   background-color: rgb(240, 240, 240);
-  //   // background-color: red;
-  // }
-
-  &.filter {
-    // background-color: rgba(255, 255, 255, 0.692);
-  }
 
   @include mix.input-style--button;
 
   .tag-text {
-    color: rgb(32, 155, 141);
-    // padding: var.$tags-size*0.4;
+    color: var.$green;
     font-size: var.$tags-size*0.5;
-    // border: 1px solid rgb(247, 0, 255);
-    // border-radius: ;
-    // list-style: none;
     margin: 0 var.$tags-size*0.5;
 
   }
 
   button {
+    @include mix.input-style--button;
+
     border-radius: 50%;
-    // border: none;
-    // outline: none;
     background-color: rgb(255, 255, 255);
     width: var.$tags-size;
     height: var.$tags-size;
-    font-size: var.$tags-size *0.5;
-    color: rgba(99, 99, 99, 0.863);
-
-
-
+    font-size: var.$tags-size *0.6;
+    color: grey;
     cursor: pointer;
-
-    @include mix.input-style--button;
 
     &.hidden {
       display: none;

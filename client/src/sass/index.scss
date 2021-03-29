@@ -8,10 +8,6 @@
 
 
 body {
-  // background:
-  // radial-gradient(ellipse at -100% -100%,#F3DEDB #6EA1C0, transparent);//,
-  // radial-gradient(ellipse at 200% 200%, #84DED4, transparent);
-  // radial-gradient(ellipse at 80% 600%, #F3DEDB, transparent);
   ::selection {
     background: var.$light-green2;
   }
@@ -23,17 +19,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  // background: #f5f4fe;
   background: transparent;
   border-radius: 2px;
-  // height: 3px;
-  // width: 3px;
-
 }
 
 ::-webkit-scrollbar-thumb {
   background: var.$green;
-  // border-radius: 2px;
   height: 5px;
 }
 
@@ -48,14 +39,9 @@ a {
   &:visited {
     color: grey;
     font-weight: 400;
-
   }
 
   &:hover {
     text-decoration: underline;
   }
 }
-
-// html {
-//   font-size: 62.5%;
-// }

@@ -52,7 +52,7 @@ export default function useFeed (path, pageNum, filterTags) {
     searchFetch();
 
     return () => controller.abort();
-  }, [pageNum, path, filterTags]);
+  }, [pageNum, path, filterTags, newSearch]);
 
 
   return { searching, error, foundPhotos, hasMore };

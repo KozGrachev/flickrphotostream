@@ -12,9 +12,7 @@
 
   &:active {
     box-shadow: 0 0 0 1px var.$grey2;
-    // border: 1px solid rgb(240, 240, 240);
     background: white;
-    // box-shadow: none;
   }
 
   &:focus {
@@ -53,8 +51,6 @@
   }
 
   &:active {
-    // box-shadow: 0 0 0 3px rgb(240, 240, 240);
-    // border: 1px solid var.$green;
     border: 1px solid var.$grey2;
     background: white;
     box-shadow: none;

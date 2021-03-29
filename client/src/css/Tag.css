@@ -33,16 +33,16 @@ li .tag-text {
   margin: 0 0.65rem;
 }
 li button {
+  border: 0px solid transparent;
+  transition-property: box-shadow background-color border;
+  transition-duration: 200ms;
   border-radius: 50%;
   background-color: white;
   width: 1.3rem;
   height: 1.3rem;
-  font-size: 0.65rem;
-  color: rgba(99, 99, 99, 0.863);
+  font-size: 0.78rem;
+  color: grey;
   cursor: pointer;
-  border: 0px solid transparent;
-  transition-property: box-shadow background-color border;
-  transition-duration: 200ms;
 }
 li button:hover {
   box-shadow: 0 0 0 3px #d0eae7;

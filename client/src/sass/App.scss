@@ -3,15 +3,10 @@
 
 .app-container {
   padding-top: 5rem;
-  // display: flex;
-  // flex-direction: column;
   position: relative;
-  // height: 100vh;
 }
 
 .top {
-  // display: grid;
-  // display: flex;
   flex-direction: column;
   grid-template-columns: auto 30rem auto;
   width: 100%;
@@ -21,7 +16,6 @@
 }
 
 .search-panel {
-  // justify-self: flex-start;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -29,9 +23,6 @@
   z-index: 2;
   position: sticky;
   top: 0;
-  // background: linear-gradient(white 80%, transparent 100%);
-  // height: 5rem;
-  // grid-area: search;
   background-color: #fff;
 
 
@@ -39,14 +30,10 @@
     @include mix.input-style--text;
     padding: 0 2em;
     background: rgb(241, 241, 241);
-    // background: white;
 
     width: 30rem;
-    // width: 100%;
     height: 2rem;
     border-radius: 1rem;
-    // align-self: center;
-    // margin: 2em;
     margin: auto;
 
   }
@@ -56,7 +43,6 @@
     justify-content: center;
     align-items: center;
     min-width: 0rem;
-    // height: 0;
     height: 3em;
     border: 1px solid transparent;
     transition-property: min-width border;
@@ -66,8 +52,6 @@
       margin: 2rem auto 0;
       border-top: 1px solid var.$grey1;
       border-bottom: 1px solid var.$grey1;
-      // border-top: 1px solid rgba(255, 255, 255, 0.548);
-      // border-bottom: 1px solid rgba(255, 255, 255, 0.5);
       min-width: 30rem;
       max-width: min-content;
     }
@@ -77,12 +61,8 @@
 .title-panel {
   grid-area: title;
   margin-left: 5rem;
-  // top: 20%;
-  // border: 3px solid red;
   display: flex;
   flex-direction: column;
-  // position: absolute;
-  // width: 100%;
   z-index: 1;
   pointer-events: none;
 
@@ -97,45 +77,15 @@
   }
 }
 
-// Horizontal
-// .cards-container {
-//   padding: 10vh 10% 5rem 5rem;
-//   display: grid;
-//   flex-grow: 1;
-
-//   grid-auto-columns: 400px;
-//   grid-auto-flow: column;
-//   gap: 5rem;
-//   overflow-x: scroll;
-
-//   // border: 3px solid red;
-// }
-
-
-
-
-// 4-wide grid
 .cards-container {
   padding: 5rem 5rem 0 5rem;
   display: grid;
-  // grid-template-columns: repeat(1, minmax(0,1fr));
-  // grid-auto-rows: auto;
   gap: 2rem;
   width: 1fr;
   justify-self: stretch;
-
-  // width: 100%;
-  // height: 100vh;
 }
 
-// @media (max-width: 1580px) {
-//   .top {
-//     grid-template-columns: repeat(1, minmax(0,1fr));
-//   };
-// }
-
 @media (min-width: 1491px) {
-
   .cards-container {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -143,7 +93,6 @@
 
 @media (max-width: 1490px) {
   .cards-container {
-
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -164,8 +113,3 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
-
-
-// < 1490px = 3 columns
-// < 1110px = 2 columns
-// < 730px = 1 column

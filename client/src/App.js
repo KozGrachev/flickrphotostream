@@ -29,13 +29,13 @@ function App () {
   const {
     foundPhotos,
     loading: loadingSearch,
-    error: searchError,
+    error: searchError, //! add error-handling
     hasMore: searchHasMore
   } = useSearch(searchPageNum, query);
   const {
     foundPhotos: feedPhotos = { photos: [] },
     loading: loadingFeed,
-    error: feedError,
+    error: feedError, //! add error-handling
     hasMore: feedHasMore,
   } = useFeed('interesting', feedPageNum, filterTags, );
 

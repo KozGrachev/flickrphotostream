@@ -34,7 +34,12 @@ export default function Tag ({
         onClick={(e) => {
           e.stopPropagation();
           filterHandler(tagText);
-        }}>+</button>
+        }}>{
+          isInCard && !isSelected
+            ? '+'
+            : !isInCard
+              ? 'x'
+            : ''}</button>
     </li>
   )
 }
