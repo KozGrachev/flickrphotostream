@@ -17,13 +17,13 @@ export default function Tag ({
 
   return (
     <li
-      className={`${isSelected && 'selected'} ${!isInCard &&  'filter'}`}
+      className={`${isSelected ? 'selected' : ''} ${!isInCard &&  'filter'}`}
       key={tagText}
       onClick={(e) => {
         e.stopPropagation();
         searchHandler(tagText);
         // filterHandler(null);
-        clearFilterTags();
+        if (clearFilterTags) clearFilterTags();
       }}
     >
       <div className="tag-text">

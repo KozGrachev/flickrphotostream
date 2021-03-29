@@ -8,7 +8,6 @@ export default function useSearch (pageNum, searchQuery) {
   const [error, setError] = useState(false);
   const [foundPhotos, setFoundPhotos] = useState([]);
   const [hasMore, setHasMore] = useState(false)
-  // const cachedSearch = useMemo(() => )
 
   useEffect(() => {
     setSearching(true);

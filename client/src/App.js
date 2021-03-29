@@ -161,7 +161,7 @@ function App () {
       </section>
       <div className="search-panel">
         <input className="search" placeholder="Search..." onChange={handleSearch} value={query} />
-        <div className={`filter-tags-container ${filterTags.length && 'visible'}`}>
+        <div className={`filter-tags-container ${filterTags.length ? 'visible' : ''}`}>
           {filterTags.map(tag => <Tag
             tagText={tag}
             filterHandler={() => removeFilterTag(tag)}
