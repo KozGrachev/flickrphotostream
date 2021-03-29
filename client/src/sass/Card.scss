@@ -35,6 +35,7 @@
 
     figcaption {
       display: flex;
+      flex-direction: column;
     }
 
     .close-focused-button {
@@ -62,12 +63,14 @@
       }
     }
 
-    .description-container {
+    .description-tags-wrapper {
+      overflow: auto;
+    }
 
+    .description-container {
       display: flex;
       flex-direction: column;
       overflow-y: scroll;
-      // border: 3px solid purple;
       font-size: 1rem;
     }
 
@@ -78,8 +81,6 @@
       overflow-y: scroll;
 
     }
-
-
 
     .shadow-box {
       visibility: hidden;
@@ -100,11 +101,23 @@
         margin-left: 2rem;
         padding-left: 2rem;
         border-left: 1px solid var.$grey1;
+        position: relative;
+        // flex-direction: column;
+      }
+
+
+      .description-tags-wrapper {
+        position: relative;
+        display: flex;
         flex-direction: column;
+        max-height: 100%;
       }
 
       .description-container {
         height: fit-content;
+        max-height: 100%;
+        // height: 300px;
+        // overflow-y: scroll;
       }
 
       .tags-list-wrapper {
@@ -121,9 +134,14 @@
     @media (max-width: 120vh) {
       flex-direction: column;
 
+      .title {
+        @include mix.truncate(1);
+        padding-top: 2rem;
+        ;
+      }
 
-      figcaption {
-        flex-direction: row;
+      .description-tags-wrapper {
+        display: flex;
         margin-top: 2rem;
         padding-top: 2rem;
         border-top: 1px solid var.$grey1;
@@ -135,13 +153,14 @@
       }
 
       .description-container {
-        display: flex;
-        max-height:100%;
+        margin-top: 0;
+        min-height: 100%;
       }
 
       .tags-list {
+        margin-top: 0;
         margin-left: 2rem;
-        min-width: 20rem;
+        min-width: 10rem;
         max-width: 20rem;
       }
     }

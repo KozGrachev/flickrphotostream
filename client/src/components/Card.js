@@ -20,13 +20,7 @@ export default function Card ({
 
   useEffect(() => {
     descriptionRef.current.innerHTML = description;
-  }, []);
-
-  // useEffect(() => {
-
-  // })
-
-
+  }, [description]);
 
   console.log(photoUrls)
   return (
@@ -52,20 +46,22 @@ export default function Card ({
             <i>by</i> <a href={authorUrl} >{author}</a>
           </div>
         </div>
-        <div className="description-container" ref={descriptionRef} />
-        <div className="tags-list-wrapper">
-          <ul className="tags-list">{tags.split(' ').map((tag, i) => {
-            return <Tag
-              tagText={tag}
-              filterHandler={filterHandler}
-              searchHandler={searchHandler}
-              clearFilterTags={clearFilterTags}
-              isInCard={true}
-              tagIsSelected={filterTags.length && filterTags.includes(tag)}
-              key={tag + i} />
-          })}
-            <div className="shadow-box" />
-          </ul>
+        <div className="description-tags-wrapper">
+          <div className="description-container" ref={descriptionRef} />
+          <div className="tags-list-wrapper">
+            <ul className="tags-list">{tags.split(' ').map((tag, i) => {
+              return <Tag
+                tagText={tag}
+                filterHandler={filterHandler}
+                searchHandler={searchHandler}
+                clearFilterTags={clearFilterTags}
+                isInCard={true}
+                tagIsSelected={filterTags.length && filterTags.includes(tag)}
+                key={tag + i} />
+            })}
+              <div className="shadow-box" />
+            </ul>
+          </div>
         </div>
       </figcaption>
       {isFocused && <button
