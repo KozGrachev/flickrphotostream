@@ -27,6 +27,7 @@ router.get('/search/:query/:pageNum', async (req, res) => {
   const url = baseUrl + new URLSearchParams({
     ...sharedExtras,
     method: 'flickr.photos.search',
+    safe_search: 1,
     text: query,
     page: pageNum,
     per_page: 50

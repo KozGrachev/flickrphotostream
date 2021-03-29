@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cacheQuery } from '../cache';
 const url = "http://localhost:3010";
 
@@ -11,7 +11,6 @@ export default function useFeed (path, pageNum, filterTags) {
   const [newSearch, setNewSearch] = useState(true)
 
   useEffect(() => {
-    console.log('filterTags:  ', filterTags);
     if (filterTags.length === 0) {
       setNewSearch(true);
       setFoundPhotos([]);
@@ -33,7 +32,6 @@ export default function useFeed (path, pageNum, filterTags) {
           return j;
         });
 
-        console.log('JSON RESPONSE:::   ', jsonRes);
         setFoundPhotos(currentPhotos => {
           if (newSearch) {
             return jsonRes.photos.photo;

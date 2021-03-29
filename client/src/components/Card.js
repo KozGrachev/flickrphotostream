@@ -22,7 +22,6 @@ export default function Card ({
     descriptionRef.current.innerHTML = description;
   }, [description]);
 
-  console.log(photoUrls)
   return (
     <figure onScroll={(e)=> e.stopPropagation()} className={`card-container ${isFocused ? 'focused' : 'unfocused'}`} >
       <img

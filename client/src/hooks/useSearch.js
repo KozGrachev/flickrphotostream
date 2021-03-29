@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { cacheQuery } from '../cache';
 const url = "http://localhost:3010";
 
@@ -21,12 +21,10 @@ export default function useSearch (pageNum, searchQuery) {
       try {
         const query = url + `/search/${searchQuery}/${pageNum}`;
         const jsonRes = await cacheQuery(query, async (q) => {
-          console.log('HANDLING QUERY');
           const r = await fetch(q, { signal });
           const j = await r.json();
           return j;
         });
-        console.log('JSON RESPONSE:::   ', jsonRes);
         setFoundPhotos(currentPhotos => {
           return [...new Set([...currentPhotos, ...jsonRes.photos.photo])]
         });
@@ -36,7 +34,6 @@ export default function useSearch (pageNum, searchQuery) {
       } catch (error) {
         setError(true);
         if (error === 'AbortError') {
-          console.log('Fetch aborted!!');
           return;
         }
       }
@@ -56,7 +53,6 @@ export default function useSearch (pageNum, searchQuery) {
   }, [searchQuery, pageNum]);
 
   useEffect(() => {
-    console.log('CLEARING FOUND PHOTOS IN SEARCH', searchQuery);
     setFoundPhotos([]);
   }, [searchQuery]);
 

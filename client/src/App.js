@@ -41,7 +41,6 @@ function App () {
 
 
   useEffect(() => {
-    console.log('PHOTOS::', feedPhotos)
     if (query.length > 2) {
       if (filterTags.length) {
         setPhotosToDisplay(filterByTags(foundPhotos));
@@ -92,8 +91,6 @@ function App () {
 
   }, [loadingSearch, loadingFeed, searchHasMore, feedHasMore, query]);
 
-  console.log(foundPhotos.map((p, i) => i + '   ' + p.title + '   ' + p.id))
-  // console.log(foundPhotos)
 
   function handleSearch (event) {
     setQuery(event.target.value);
@@ -145,7 +142,6 @@ function App () {
   function removeFilterTag (tag) {
     setFilterTags(currentTags => {
       return currentTags.filter(t => t !== tag)
-
     });
   }
 
