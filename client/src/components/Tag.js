@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../sass/Tag.scss';
+import '../sass/Tag.css';
 
 export default function Tag ({
   tagText,
