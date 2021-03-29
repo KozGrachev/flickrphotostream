@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { cacheQuery } from '../cache';
-const url = "http://localhost:" + process.env.PORT || 3010;
+const url = process.env.NODE_ENV === 'production' ? 'http://localhost:3010' : '';
 
 export default function useSearch (pageNum, searchQuery) {
 
