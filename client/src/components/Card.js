@@ -13,7 +13,7 @@ export default function Card ({
   filterHandler,
   searchHandler,
   filterTags,
-  clearFilterTags}) {
+  clearFilterTags }) {
 
   const [isFocused, setIsFocused] = useState(false)
   const descriptionRef = useRef();
@@ -22,20 +22,38 @@ export default function Card ({
     descriptionRef.current.innerHTML = description;
   }, []);
 
-  return (
-    <div className={`card-container ${isFocused ? 'focused' : 'unfocused'}`} onClick={() => setIsFocused(isFoc => !isFoc)}>
+  // useEffect(() => {
 
-      <figure>
-        <img src={isFocused ? photoUrls.medium : photoUrls.small} alt={title} />
-        <figcaption>
-          <div className="details">
-            {/* {`${photoUrls.large}`} */}
-            <a href={photoUrls.large} className="title">{title}</a>
-            <div className="author">
-              <i>by <a href={authorUrl} >{author}</a></i>
-            </div>
+  // })
+
+
+
+  console.log(photoUrls)
+  return (
+    <figure onScroll={(e)=> e.stopPropagation()} className={`card-container ${isFocused ? 'focused' : 'unfocused'}`} >
+      <img
+        onClick={() => isFocused || setIsFocused(isFoc => !isFoc)}
+        src={
+          isFocused && photoUrls.xl
+            ? photoUrls.xl
+            : isFocused && !photoUrls.xl
+              ? photoUrls.l
+              : photoUrls.s
+        }
+        alt={title}
+        className={isFocused || 'clickable'}
+      />
+      <figcaption>
+
+        <div className="details">
+          {/* {`${photoUrls.l}`} */}
+          <a href={photoUrls.xl} className="title">{title}</a>
+          <div className="author">
+            <i>by</i> <a href={authorUrl} >{author}</a>
           </div>
-          <div className="description-container" ref={descriptionRef} />
+        </div>
+        <div className="description-container" ref={descriptionRef} />
+        <div className="tags-list-wrapper">
           <ul className="tags-list">{tags.split(' ').map((tag, i) => {
             return <Tag
               tagText={tag}
@@ -48,8 +66,13 @@ export default function Card ({
           })}
             <div className="shadow-box" />
           </ul>
-        </figcaption>
-      </figure>
-    </div>
+        </div>
+      </figcaption>
+      {isFocused && <button
+        className="close-focused-button"
+        onClick={() => setIsFocused(isFoc => !isFoc)}>
+        X
+          </button>}
+    </figure>
   )
 }

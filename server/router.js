@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const baseUrl = 'https://api.flickr.com/services/rest/?';
 
 const sharedExtras = {
-  extras: ['url_n', 'url_z', 'url_l', 'description', 'tags', 'owner_name'],
+  extras: ['url_n', 'url_z', 'url_l', 'url_h', 'description', 'tags', 'owner_name'],
   api_key: process.env.API_KEY,
   format: 'json',
   nojsoncallback: 1,

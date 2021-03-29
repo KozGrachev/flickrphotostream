@@ -9,82 +9,182 @@
   transform: scale(1.1);
 }
 .card-container.focused {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   box-shadow: none;
   z-index: 2;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: white;
+  padding: 2rem;
+  transition: none;
 }
 .card-container.focused:hover {
   transition-duration: 400ms;
   transform: unset;
 }
-.card-container.focused figure {
-  margin: auto 0;
-  position: relative;
-  padding: 1em;
+.card-container.focused figcaption {
+  display: flex;
+}
+.card-container.focused .close-focused-button {
+  border: 0px solid transparent;
+  transition-property: box-shadow background-color border;
+  transition-duration: 200ms;
+  position: fixed;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin: 1rem;
+  padding: 0;
+  right: 0;
+  top: 0;
+}
+.card-container.focused .close-focused-button:hover {
+  box-shadow: 0 0 0 3px #d0eae7;
+}
+.card-container.focused .close-focused-button:active {
+  box-shadow: 0 0 0 1px #f0f0f0;
+  background: white;
+}
+.card-container.focused .close-focused-button:focus {
+  outline: none;
+  border: 1px solid rgba(37, 192, 159, 0.404);
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+}
+.card-container.focused .close-focused-button:disabled {
+  border: none;
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+  cursor: not-allowed;
+}
+.card-container.focused .details {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.card-container.focused .details .title {
+  margin-right: 1em;
+  font-size: 2rem;
+}
+.card-container.focused .description-container {
   display: flex;
   flex-direction: column;
-  max-width: min-content;
-  box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+  overflow-y: scroll;
+  font-size: 1rem;
 }
-.card-container.focused figure img {
-  width: auto;
-  height: auto;
-}
-.card-container.focused figure .description-container {
+.card-container.focused .tags-list {
   display: flex;
-  flex-direction: column;
-  height: max-content;
-}
-.card-container.focused figure .tags-list {
-  display: flex;
-  max-height: 10em;
+  min-height: 10rem;
+  max-height: 100%;
   overflow-y: scroll;
 }
-.card-container.focused figure .shadow-box {
+.card-container.focused .shadow-box {
   visibility: hidden;
+}
+.card-container.focused img {
+  object-fit: contain;
+  overflow: auto;
+}
+@media (min-width: 120vh) {
+  .card-container.focused figcaption {
+    min-width: 20rem;
+    max-width: 20rem;
+    margin-left: 2rem;
+    padding-left: 2rem;
+    border-left: 1px solid #d6d6d6;
+    flex-direction: column;
+  }
+  .card-container.focused .description-container {
+    height: fit-content;
+  }
+  .card-container.focused .tags-list-wrapper {
+    margin-top: 2rem;
+    border-top: 1px solid #d6d6d6;
+  }
+  .card-container.focused .tags-list {
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 120vh) {
+  .card-container.focused {
+    flex-direction: column;
+  }
+  .card-container.focused figcaption {
+    flex-direction: row;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #d6d6d6;
+  }
+  .card-container.focused .tags-list-wrapper {
+    margin-left: 2rem;
+    border-left: 1px solid #d6d6d6;
+  }
+  .card-container.focused .description-container {
+    display: flex;
+    max-height: 100%;
+  }
+  .card-container.focused .tags-list {
+    margin-left: 2rem;
+    min-width: 20rem;
+    max-width: 20rem;
+  }
+}
+.card-container img.clickable {
+  cursor: zoom-in;
 }
 .card-container.unfocused img {
   height: 15em;
   width: 100%;
   object-fit: cover;
 }
-.card-container figure {
+
+figure {
   background: white;
 }
-.card-container .details {
+
+.details {
   margin-top: 2rem;
 }
-.card-container .details .title {
+.details .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   text-transform: uppercase;
-  text-decoration: none;
   font-weight: 700;
 }
-.card-container .details .author {
+.details .author {
   font-size: 0.8rem;
   display: flex;
   margin-top: 0.5rem;
 }
-.card-container .details .author p {
+.details .author i {
   margin-right: 0.5em;
 }
-.card-container .description-container {
-  height: 3rem;
-  margin-top: 2rem;
+.details .author a {
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.description-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  height: 3rem;
+  margin-top: 2rem;
   font-size: 0.7em;
 }
-.card-container .tags-list {
+
+.tags-list {
   margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
@@ -93,41 +193,10 @@
   overflow-y: hidden;
   position: relative;
 }
-.card-container .tags-list .shadow-box {
+.tags-list .shadow-box {
   position: absolute;
   width: 100%;
   height: 100%;
   box-shadow: inset 0 -2.6rem 1.3rem -1.3rem white;
   pointer-events: none;
-}
-
-button {
-  border-radius: 50%;
-  border: none;
-  background-color: white;
-  width: 1.3rem;
-  height: 1.3rem;
-  font-size: 0.65rem;
-  color: rgba(99, 99, 99, 0.863);
-  cursor: pointer;
-  border: 0px solid transparent;
-  transition-property: box-shadow background-color border;
-  transition-duration: 200ms;
-}
-button:hover {
-  box-shadow: 0 0 0 3px #d0eae7;
-}
-button:active {
-  box-shadow: 0 0 0 1px #f0f0f0;
-  background: white;
-}
-button:focus {
-  outline: none;
-  border: 1px solid rgba(37, 192, 159, 0.404);
-  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
-}
-button:disabled {
-  border: none;
-  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
-  cursor: not-allowed;
 }

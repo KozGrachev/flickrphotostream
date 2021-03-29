@@ -32,6 +32,35 @@ li .tag-text {
   font-size: 0.65rem;
   margin: 0 0.65rem;
 }
+li button {
+  border-radius: 50%;
+  background-color: white;
+  width: 1.3rem;
+  height: 1.3rem;
+  font-size: 0.65rem;
+  color: rgba(99, 99, 99, 0.863);
+  cursor: pointer;
+  border: 0px solid transparent;
+  transition-property: box-shadow background-color border;
+  transition-duration: 200ms;
+}
+li button:hover {
+  box-shadow: 0 0 0 3px #d0eae7;
+}
+li button:active {
+  box-shadow: 0 0 0 1px #f0f0f0;
+  background: white;
+}
+li button:focus {
+  outline: none;
+  border: 1px solid rgba(37, 192, 159, 0.404);
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+}
+li button:disabled {
+  border: none;
+  box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+  cursor: not-allowed;
+}
 li button.hidden {
   display: none;
 }

@@ -7,9 +7,12 @@ import Tag from './components/Tag';
 
 
 function App () {
-  const smallSizeCode = 'n';
-  const mediumSizeCode = 'z';
-  const largeSizeCode = 'l';
+  const photoSizeCodes = {
+    s: 'n',
+    m: 'z',
+    l: 'l',
+    xl: 'h',
+  }
 
   const [query, setQuery] = useState('');
   const [searchPageNum, setSearchPageNum] = useState(1);
@@ -103,7 +106,12 @@ function App () {
       title={photo.title}
       authorUrl={`https://www.flickr.com/people/${photo.owner}/`}
       author={photo.ownername}
-      photoUrls={{ small: photo[`url_${smallSizeCode}`], medium: photo[`url_${mediumSizeCode}`], large: photo[`url_${largeSizeCode}`] }}
+      photoUrls={{
+        s: photo[`url_${photoSizeCodes.s}`],
+        m: photo[`url_${photoSizeCodes.m}`],
+        l: photo[`url_${photoSizeCodes.l}`],
+        xl: photo[`url_${photoSizeCodes.xl}`],
+      }}
       description={photo.description._content}
       filterHandler={addFilterTag}
       searchHandler={searchByTag}

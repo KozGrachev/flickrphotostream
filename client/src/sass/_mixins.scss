@@ -1,3 +1,5 @@
+@use 'variables' as var;
+
 @mixin input-style--button {
   border: 0px solid transparent;
 
@@ -5,11 +7,11 @@
   transition-duration: 200ms;
 
   &:hover {
-    box-shadow: 0 0 0 3px rgb(208, 234, 231);
+    box-shadow: 0 0 0 3px var.$light-green1;
   }
 
   &:active {
-    box-shadow: 0 0 0 1px rgb(240, 240, 240);
+    box-shadow: 0 0 0 1px var.$grey2;
     // border: 1px solid rgb(240, 240, 240);
     background: white;
     // box-shadow: none;
@@ -18,13 +20,13 @@
   &:focus {
     outline: none;
 
-    border: 1px solid rgba(37, 192, 159, 0.404);
-    box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+    border: 1px solid var.$light-green2;
+    box-shadow: inset 0 0 0 1em var.$light-green2;
   }
 
   &:disabled {
     border:none;
-    box-shadow: inset 0 0 0 1em rgba(37, 192, 159, 0.404);
+    box-shadow: inset 0 0 0 1em var.$light-green2;
     cursor: not-allowed;
   }
 }
@@ -37,8 +39,8 @@
   transition-duration: 200ms;
 
   &:hover {
-    border: 1px solid rgb(240, 240, 240);
-    box-shadow: 0 0 0 3px rgb(208, 234, 231);
+    border: 1px solid var.$grey2;
+    box-shadow: 0 0 0 3px var.$light-green1;
     background: white;
   }
 
@@ -46,15 +48,24 @@
   &:focus {
     outline: none;
     background: white;
-    border: 1px solid rgb(32, 155, 141);
-    box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+    border: 1px solid var.$green;
+    box-shadow: 0 0 0 3px var.$light-green2;
   }
 
   &:active {
     // box-shadow: 0 0 0 3px rgb(240, 240, 240);
-    // border: 1px solid rgb(32, 155, 141);
-    border: 1px solid rgb(240, 240, 240);
+    // border: 1px solid var.$green;
+    border: 1px solid var.$grey2;
     background: white;
     box-shadow: none;
   }
+}
+
+@mixin truncate ($num-lines) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+
+  -webkit-line-clamp: $num-lines;
+  -webkit-box-orient: vertical;
 }

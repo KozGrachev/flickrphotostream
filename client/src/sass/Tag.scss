@@ -1,5 +1,5 @@
-@use 'variables' as var;
-@use 'mixins' as mix;
+@use 'variables'as var;
+@use 'mixins'as mix;
 
 li {
   height: var.$tags-size;
@@ -37,7 +37,24 @@ li {
 
   }
 
-  button.hidden {
-    display: none;
+  button {
+    border-radius: 50%;
+    // border: none;
+    // outline: none;
+    background-color: rgb(255, 255, 255);
+    width: var.$tags-size;
+    height: var.$tags-size;
+    font-size: var.$tags-size *0.5;
+    color: rgba(99, 99, 99, 0.863);
+
+
+
+    cursor: pointer;
+
+    @include mix.input-style--button;
+
+    &.hidden {
+      display: none;
+    }
   }
 }

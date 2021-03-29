@@ -1,3 +1,5 @@
+@use 'variables' as var;
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -11,7 +13,7 @@ body {
   // radial-gradient(ellipse at 200% 200%, #84DED4, transparent);
   // radial-gradient(ellipse at 80% 600%, #F3DEDB, transparent);
   ::selection {
-    background: rgba(37, 192, 159, 0.404);
+    background: var.$light-green2;
   }
 }
 
@@ -30,20 +32,21 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(32, 155, 141);
+  background: var.$green;
   // border-radius: 2px;
   height: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(43, 117, 109);
+  background: var.$dark-green;
 }
 
 a {
-  color: rgb(8, 172, 152);
+  color: var.$green;
+  text-decoration: none;
 
   &:visited {
-    color: rgb(36, 110, 102);
+    color: grey;
     font-weight: 400;
 
   }

@@ -8,72 +8,147 @@
   background: transparent;
 
   &:hover {
-    box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+    box-shadow: 0 0 0 3px var.$light-green2;
     transform: scale(1.1);
   }
 
   &.focused {
-    // transition: none;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
-    // transform: translate(-50%, -50%);
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     box-shadow: none;
     z-index: 2;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    justify-content: space-between;
     background: white;
+    // border: 3px solid yellow;
+    padding: 2rem;
+    transition: none;
 
     &:hover {
-      // transition-property: box-shadow transform background width height;
       transition-duration: 400ms;
-      // transition: none;
       transform: unset;
     }
 
+    figcaption {
+      display: flex;
+    }
 
-    figure {
-      margin: auto 0;
-      position: relative;
-      padding: 1em;
-      // border: 3px solid green;
+    .close-focused-button {
+      // align-self: flex-end;
+      @include mix.input-style--button;
+      position: fixed;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      margin: 1rem;
+      padding: 0;
+      right: 0;
+      top: 0;
+    }
+
+    .details {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 0;
+
+      .title {
+        margin-right: 1em;
+        font-size: 2rem;
+      }
+    }
+
+    .description-container {
+
       display: flex;
       flex-direction: column;
-      max-width: min-content;
-      box-shadow: 0 0 0 3px rgba(37, 192, 159, 0.404);
+      overflow-y: scroll;
+      // border: 3px solid purple;
+      font-size: 1rem;
+    }
+
+    .tags-list {
+      display: flex;
+      min-height: 10rem;
+      max-height: 100%;
+      overflow-y: scroll;
+
+    }
 
 
-      img {
-        // display: block;
-        // position:relative;
-        width: auto;
-        height: auto;
-        // object-fit: contain;
+
+    .shadow-box {
+      visibility: hidden;
+    }
+
+    img {
+
+      object-fit: contain;
+      overflow: auto;
+    }
+
+
+    // LANDSCAPE
+    @media (min-width: 120vh) {
+      figcaption {
+        min-width: 20rem;
+        max-width: 20rem;
+        margin-left: 2rem;
+        padding-left: 2rem;
+        border-left: 1px solid var.$grey1;
+        flex-direction: column;
       }
 
       .description-container {
-        // visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        height:max-content
+        height: fit-content;
+      }
+
+      .tags-list-wrapper {
+        margin-top: 2rem;
+        border-top: 1px solid var.$grey1;
       }
 
       .tags-list {
-        // flex-wrap: wrap;
-        display:flex;
-        // width: 100%;
-        // -height: 10em;
-        max-height: 10em;
-        overflow-y: scroll;
-      }
-
-      .shadow-box {
-        visibility: hidden;
+        margin-top: 2rem;
       }
     }
+
+    // PORTRAIT
+    @media (max-width: 120vh) {
+      flex-direction: column;
+
+
+      figcaption {
+        flex-direction: row;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var.$grey1;
+      }
+
+      .tags-list-wrapper {
+        margin-left: 2rem;
+        border-left: 1px solid var.$grey1;
+      }
+
+      .description-container {
+        display: flex;
+        max-height:100%;
+      }
+
+      .tags-list {
+        margin-left: 2rem;
+        min-width: 20rem;
+        max-width: 20rem;
+      }
+    }
+  }
+
+  img.clickable {
+    cursor: zoom-in;
   }
 
   &.unfocused {
@@ -82,90 +157,66 @@
       width: 100%;
       object-fit: cover;
     }
-
-    // figcaption{
-    //   padding: 0 1rem;
-    // }
   }
 
-  figure {
-    // border: 3px solid red;
-    background: white;
-  }
+}
 
-
-  .details {
-    margin-top: 2rem;
-
-    .title {
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .author {
-      font-size: 0.8rem;
-      display: flex;
-      margin-top: 0.5rem;
-
-      p {
-        margin-right: 0.5em;
-      }
-    }
-  }
-
-  .description-container {
-    height: 3rem;
-    // border: 1px solid green;
-    margin-top: 2rem;
-    overflow: hidden;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    font-size: 0.7em;
-  }
-
-  .tags-list {
-    margin-top: 1em;
-    // list-style: none;
-    display: flex;
-    // // display: block;
-    flex-wrap: wrap;
-    // max-width: min-content;
-    padding: 0;
-    height: var.$tags-size * 3;
-    overflow-y: hidden;
-    position: relative;
-
-    .shadow-box {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      box-shadow: inset 0 var.$tags-size*-2 var.$tags-size var.$tags-size*-1 rgb(255, 255, 255);
-      // border: 1px solid blue;
-      pointer-events: none;
-    }
-
-  }
+figure {
+  // border: 3px solid red;
+  background: white;
 }
 
 
-button {
-  border-radius: 50%;
-  border: none;
-  // outline: none;
-  background-color: rgb(255, 255, 255);
-  width: var.$tags-size;
-  height: var.$tags-size;
-  font-size: var.$tags-size *0.5;
-  color: rgba(99, 99, 99, 0.863);
+.details {
+  margin-top: 2rem;
+
+  .title {
+    @include mix.truncate(2);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .author {
+    font-size: 0.8rem;
+    display: flex;
+    margin-top: 0.5rem;
+
+    i {
+      margin-right: 0.5em;
+    }
+
+    a {
+      @include mix.truncate(1);
+
+    }
+  }
+}
+
+.description-container {
+  @include mix.truncate(3);
+  height: 3rem;
+  // border: 1px solid green;
+  margin-top: 2rem;
+  font-size: 0.7em;
+}
 
 
 
-  cursor: pointer;
+.tags-list {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  height: var.$tags-size * 3;
+  overflow-y: hidden;
+  position: relative;
 
-  @include mix.input-style--button;
+  .shadow-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 var.$tags-size*-2 var.$tags-size var.$tags-size*-1 rgb(255, 255, 255);
+    pointer-events: none;
+  }
+
 }
