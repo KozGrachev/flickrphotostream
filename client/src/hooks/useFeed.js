@@ -4,7 +4,7 @@ const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3010' : '
 
 export default function useFeed (path, pageNum, filterTags) {
 
-  const [searching, setSearching] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [foundPhotos, setFoundPhotos] = useState([]);
   const [hasMore, setHasMore] = useState(false);
@@ -18,7 +18,7 @@ export default function useFeed (path, pageNum, filterTags) {
   }, [filterTags]);
 
   useEffect(() => {
-    setSearching(true);
+    setLoading(true);
     setError(false);
     const controller = new AbortController();
     const { signal } = controller;
@@ -42,7 +42,7 @@ export default function useFeed (path, pageNum, filterTags) {
 
         setNewSearch(false);
         setHasMore(jsonRes.photos.photo.length > 0);
-        setSearching(false);
+        setLoading(false);
       } catch (error) {
         setError(true);
       }
@@ -53,5 +53,5 @@ export default function useFeed (path, pageNum, filterTags) {
   }, [pageNum, path, filterTags, newSearch]);
 
 
-  return { searching, error, foundPhotos, hasMore };
+  return { loading, error, foundPhotos, hasMore };
 }

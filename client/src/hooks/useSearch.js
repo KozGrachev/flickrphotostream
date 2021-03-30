@@ -4,13 +4,13 @@ const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3010' : '
 
 export default function useSearch (pageNum, searchQuery) {
 
-  const [searching, setSearching] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [foundPhotos, setFoundPhotos] = useState([]);
   const [hasMore, setHasMore] = useState(false)
 
   useEffect(() => {
-    setSearching(true);
+    setLoading(true);
     setError(false);
     let timeLimit;
     const controller = new AbortController();
@@ -29,7 +29,7 @@ export default function useSearch (pageNum, searchQuery) {
         });
 
         setHasMore(jsonRes.photos.photo.length > 0);
-        setSearching(false);
+        setLoading(false);
       } catch (error) {
         setError(true);
         if (error === 'AbortError') {
@@ -56,5 +56,5 @@ export default function useSearch (pageNum, searchQuery) {
   }, [searchQuery]);
 
 
-  return { searching, error, foundPhotos, hasMore };
+  return { loading, error, foundPhotos, hasMore };
 }

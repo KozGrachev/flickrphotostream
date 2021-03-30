@@ -75,15 +75,18 @@ function App () {
   const observer = useRef();
 
   const lastCardRef = useCallback(lastCard => {
-    if (loadingSearch || loadingFeed) return;
+
+    if ((query && loadingSearch) || (!query && loadingFeed)) return;
 
     if (observer.current) observer.current.disconnect();
+
     observer.current = new IntersectionObserver(entries => {
 
-      if (entries[0].isIntersecting && (searchHasMore || feedHasMore)) {
-        query
-          ? setSearchPageNum(pn => pn + 1)
-          : setFeedPageNum(pn => pn + 1);
+      if (entries[0].isIntersecting) {
+
+        if (query && searchHasMore) setSearchPageNum(pn => pn + 1)
+
+        if (!query && feedHasMore) setFeedPageNum(pn => pn + 1);
       }
     });
 
@@ -118,12 +121,15 @@ function App () {
     />
   }
 
+  // function showLoadMore () {
+  //   if ()
+  // }
+
   function renderCards (coll) {
     return coll.map((photo, i) => {
       return i + 1 === coll.length
         ? <div key={photo.id + i} ref={lastCardRef}>
           {createCard(photo)}
-          <input type="button" value="Load more..."/>
         </div>
         : <div key={photo.id + i} >
           {createCard(photo)}
@@ -171,9 +177,7 @@ function App () {
       </div>
       <main ref={cardsContainerRef} className="cards-container">
 
-        {!loadingFeed || !loadingSearch
-          ? renderCards(photosToDisplay)
-          : <p>Loading...</p>}
+        {photosToDisplay.length ? renderCards(photosToDisplay) : <h1>LOADING...</h1>}
 
       </main>
     </div>

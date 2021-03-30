@@ -34,7 +34,7 @@ export default function Card ({
               : photoUrls.s
         }
         alt={title}
-        className={isFocused ? 'clickable' : ''}
+        className={!isFocused ? 'clickable' : ''}
       />
       <figcaption>
 
