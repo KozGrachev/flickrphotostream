@@ -4,6 +4,7 @@ import useFeed from "./hooks/useFeed"
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Card from './components/Card';
 import Tag from './components/Tag';
+import Spinner from './components/Spinner'
 
 
 function App () {
@@ -175,9 +176,9 @@ function App () {
             key={tag} />)}
         </div>
       </div>
-      <main ref={cardsContainerRef} className="cards-container">
+      <main ref={cardsContainerRef} className={`${photosToDisplay.length ? "cards-container" : null}`}>
 
-        {photosToDisplay.length ? renderCards(photosToDisplay) : <h1>LOADING...</h1>}
+        {photosToDisplay.length ? renderCards(photosToDisplay) : <Spinner />}
 
       </main>
     </div>
