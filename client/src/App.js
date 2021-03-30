@@ -122,10 +122,6 @@ function App () {
     />
   }
 
-  // function showLoadMore () {
-  //   if ()
-  // }
-
   function renderCards (coll) {
     return coll.map((photo, i) => {
       return i + 1 === coll.length
@@ -177,7 +173,6 @@ function App () {
         </div>
       </div>
       <main ref={cardsContainerRef} className={`${photosToDisplay.length ? "cards-container" : null}`}>
-
         {photosToDisplay.length ? renderCards(photosToDisplay) : <Spinner />}
 
       </main>
