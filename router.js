@@ -17,9 +17,15 @@ router.get('/interesting/:pageNum', async (req, res) => {
     per_page: 50,
     page: pageNum
   }).toString();
-  const fetchRes = await fetch(url);
-  const jsonRes = await fetchRes.json();
-  res.send(jsonRes);
+
+  try {
+    const fetchRes = await fetch(url);
+    const jsonRes = await fetchRes.json();
+    res.send(jsonRes);
+
+  } catch (error) {
+    res.send(error);
+  }
 })
 
 router.get('/search/:query/:pageNum', async (req, res) => {
@@ -32,9 +38,15 @@ router.get('/search/:query/:pageNum', async (req, res) => {
     page: pageNum,
     per_page: 50
   }).toString();
-  const fetchRes = await fetch(url);
-  const jsonRes = await fetchRes.json();
-  res.send(jsonRes);
+  
+  try {
+    const fetchRes = await fetch(url);
+    const jsonRes = await fetchRes.json();
+    res.send(jsonRes);
+
+  } catch (error) {
+    res.send(error);
+  }
 })
 
 module.exports = router;

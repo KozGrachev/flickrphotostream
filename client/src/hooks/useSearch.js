@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { cacheQuery } from '../cache';
-const url = process.env.NODE_ENV === 'production' ? 'http://localhost:3010' : '';
+const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3010' : 'https://flickrphotostream.herokuapp.com';
 
 export default function useSearch (pageNum, searchQuery) {
 
