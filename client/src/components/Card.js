@@ -15,7 +15,8 @@ export default function Card ({
   filterTags,
   clearFilterTags }) {
 
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState(false);
+  // const [photoSize, setPhotoSize] = useState()
   const descriptionRef = useRef();
 
   useEffect(() => {
@@ -33,7 +34,13 @@ export default function Card ({
               ? photoUrls.l
               : photoUrls.s
         }
-        alt={title}
+        alt={`${title} ${
+          isFocused && photoUrls.xl
+            ? '- large'
+            : isFocused && !photoUrls.xl
+              ? '- medium'
+              : '- small'
+        }`}
         className={!isFocused ? 'clickable' : ''}
       />
       <figcaption>
@@ -64,6 +71,7 @@ export default function Card ({
         </div>
       </figcaption>
       {isFocused && <button
+        name="close-large-view"
         className="close-focused-button"
         onClick={() => setIsFocused(isFoc => !isFoc)}>
         X

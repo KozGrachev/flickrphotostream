@@ -22,15 +22,14 @@ export default function Tag ({
       onClick={(e) => {
         e.stopPropagation();
         searchHandler(tagText);
-        // filterHandler(null);
-        if (clearFilterTags) clearFilterTags();
+        if (clearFilterTags)  clearFilterTags();
       }}
     >
       <div className="tag-text">
         {tagText}
       </div>
       <button disabled={isSelected}
-
+        name="add-tag-to-filter"
         onClick={(e) => {
           e.stopPropagation();
           filterHandler(tagText);

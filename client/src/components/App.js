@@ -1,19 +1,14 @@
-import './css/App.css';
-import useSearch from "./hooks/useSearch"
-import useFeed from "./hooks/useFeed"
+import '../css/App.css';
+import useSearch from "../hooks/useSearch"
+import useFeed from "../hooks/useFeed"
 import { useEffect, useRef, useState, useCallback } from 'react';
-import Card from './components/Card';
-import Tag from './components/Tag';
-import Spinner from './components/Spinner'
-
+import Card from './Card';
+import Tag from './Tag';
+import Spinner from './Spinner'
+import * as helpers from '../helpers'
 
 function App () {
-  const photoSizeCodes = {
-    s: 'n',
-    m: 'z',
-    l: 'l',
-    xl: 'h',
-  }
+
 
   const [query, setQuery] = useState('');
   const [searchPageNum, setSearchPageNum] = useState(1);
@@ -108,10 +103,10 @@ function App () {
       authorUrl={`https://www.flickr.com/people/${photo.owner}/`}
       author={photo.ownername}
       photoUrls={{
-        s: photo[`url_${photoSizeCodes.s}`],
-        m: photo[`url_${photoSizeCodes.m}`],
-        l: photo[`url_${photoSizeCodes.l}`],
-        xl: photo[`url_${photoSizeCodes.xl}`],
+        s: photo[`url_${helpers.photoSizeCodes.s}`],
+        m: photo[`url_${helpers.photoSizeCodes.m}`],
+        l: photo[`url_${helpers.photoSizeCodes.l}`],
+        xl: photo[`url_${helpers.photoSizeCodes.xl}`],
       }}
       description={photo.description._content}
       filterHandler={addFilterTag}
@@ -149,6 +144,7 @@ function App () {
   }
 
   function clearFilterTags () {
+    console.log('CLEARING FILTER TAGS')
     setFilterTags([]);
   }
 
@@ -159,7 +155,7 @@ function App () {
     <div className="app-container">
       <section className="top">
         <div className="title-panel">
-          <h1>Flickr</h1> <h1>Photo Stream</h1>
+          <h1>Flickr <br/>Photo Stream</h1>
         </div>
       </section>
       <div className="search-panel">
